@@ -3,3 +3,27 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.topo{
+    background-color: aqua;
+    height: 80px;
+
+    display: flex;
+    justify-content: space-between;
+    
+}
+.batepapo{
+    background-color: rgb(55, 255, 0);
+}
+.rodape{
+    background-color: blue;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+.input{
+    background-color:blueviolet;
+}
+.enviar{
+    background-color: #d28d74;
+}
