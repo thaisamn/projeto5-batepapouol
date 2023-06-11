@@ -3,14 +3,22 @@ let usuario;
 let timerManterAtivoId, timerBuscarMensagemID;
 let mensagens = [];
 
+
+function verUltimMensagem(){   
+    document.documentElement.scrollTop = document.documentElement.scrollHeight;
+}
+
 function loginDoUsuario(){
-    const nomeDeLogin =  prompt('Digite seu nome...'); 
+    const input = document.querySelector("#nomeUsuario")
+    const nomeDeLogin = input.value
     const dadosLogin = {
         name: nomeDeLogin
       };
     axios.post('https://mock-api.driven.com.br/api/vm/uol/participants' , dadosLogin)
     .then((resposta) => {
           console.log('resposta axios', resposta);
+          toggleTelaInicial();
+          verUltimMensagem();
     }).catch((erro) => {
       loginDoUsuario();
     })
@@ -18,6 +26,19 @@ function loginDoUsuario(){
     usuario = dadosLogin
     iniciarBatePapo();
 };
+
+function toggleTelaInicial() {
+    const telaIncial = document.querySelector(".pagina-inicial")
+    telaIncial.classList.toggle('esconder')
+}
+
+function togglePaginaParticipantes(){
+    const telaIncial = document.querySelector(".pagina-participantes")
+    telaIncial.classList.toggle('esconder')
+    
+}
+
+
 
 function manterAtivo(){
   axios.post('https://mock-api.driven.com.br/api/vm/uol/status' , usuario).then((resposta) => {
@@ -46,17 +67,6 @@ function buscarMensagens(){
     })
 }
 
-// loginDoUsuario();
-
-// 3 - função de buscar mensagens
-/**
- * 3.1 criar a função que busca as mensagens no servidor - OK
- * 3.2 pegar a lista de mensagens renderizadas - ok 
- * 3.3 passar as mensagens recuperadas do servidor para a lista (innerHTML)
- */
-
-
-loginDoUsuario();
 
 function criandoListaDeMensagens(novasMensagens){
     const batePapo = document.querySelector('ul');
@@ -97,7 +107,7 @@ function criandoListaDeMensagens(novasMensagens){
 }
 
 function enviarMensagem(){
-  const inputMensagens = document.querySelector('input');
+  const inputMensagens = document.querySelector('input.mensagem');
   const data = {
     from: usuario.name,
     to: "Todos",
@@ -114,8 +124,6 @@ function enviarMensagem(){
     console.log('erro', erro);
   })
 }
-
-
 
 
 const inputMensagens = document.querySelector('input');
