@@ -241,6 +241,7 @@ h1 {
     width: 100%;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
   }
 
   .tipos-de-visibilidade > div > div {

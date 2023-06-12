@@ -32,53 +32,30 @@
 
             </div>
             <div > 
-                <div class="tipos-de-visibilidade">
-                    <h1>
-                        Escolha um contato para enviar mensagem
-                    </h1>
-                    <div>
-                        <div>
-                            <ion-icon class="icones" name="people"></ion-icon>                        
-                            <p>Todos</p>
-                        </div>
-                        <ion-icon class="selecionado-icone icones" name="checkmark-sharp"></ion-icon>
-                    </div>
-                    <div>
-                        <div>
-                            <ion-icon class="icones" name="person-circle"></ion-icon>
-                            <p>João</p>
-                        </div>
-                        <ion-icon class="selecionado-icone icones" name="checkmark-sharp"></ion-icon>
-
-                    </div>
-                    <div>
-                        <div>
-                            <ion-icon  class="icones" name="person-circle"></ion-icon>
-                            <p>Maria</p>
-                        </div>
-                        <ion-icon class="selecionado-icone icones" name="checkmark-sharp"></ion-icon>
-
-                    </div>
-                                          
+                <h1>
+                    Escolha um contato para enviar mensagem
+                </h1>
+                <div class="tipos-de-visibilidade usuarios">
+                    
                 </div>
-
+                <h1>
+                    Escolha a visibilidade:
+                </h1>
                 <div class="tipos-de-visibilidade">
-                    <h1>
-                        Escolha a visibilidade:
-                    </h1>
-                    <div>
+                    
+                    <div onclick="selecionarVisibilidade(this, 'message')">
                         <div>
                             <ion-icon class="icones" name="lock-open"></ion-icon>                        
                             <p>Público</p>
                         </div>
                         <ion-icon class="selecionado-icone icones" name="checkmark-sharp"></ion-icon>
                     </div>
-                    <div>
+                    <div onclick="selecionarVisibilidade(this, 'private_message')">
                         <div>
                             <ion-icon class="icones" name="lock-closed"></ion-icon>
                             <p>Reservadamente</p>
                         </div>
-                            <ion-icon class="selecionado-icone icones" name="checkmark-sharp"></ion-icon>
+                            <ion-icon class="selecionado-icone icones esconder" name="checkmark-sharp"></ion-icon>
                     </div>
                 </div>
             </div>

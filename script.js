@@ -2,6 +2,7 @@ axios.defaults.headers.common['Authorization'] = 'RemO3eOh1dT1W5imRPVKUR8m';
 let usuario;
 let timerManterAtivoId, timerBuscarMensagemID;
 let mensagens = [];
+let usuarios = [];
 
 
 function verUltimMensagem(){   
@@ -38,8 +39,6 @@ function togglePaginaParticipantes(){
     
 }
 
-
-
 function manterAtivo(){
   axios.post('https://mock-api.driven.com.br/api/vm/uol/status' , usuario).then((resposta) => {
   }).catch((erro) => {
@@ -50,8 +49,10 @@ function manterAtivo(){
 
 function iniciarBatePapo(){
   buscarMensagens();
+  pegarUsuarios();
   timerManterAtivoId = setInterval(manterAtivo, 5000);
   timerBuscarMensagemID = setInterval(buscarMensagens, 3000);
+  timerBuscarMensagemID = setInterval(pegarUsuarios, 3000);
 
 }
 
@@ -114,15 +115,58 @@ function enviarMensagem(){
     text: inputMensagens.value,
     type: "message"
   };
-  console.log("🚀 ~ file: script.js:106 ~ enviarMensagem ~ data.inputMensagens.value:",inputMensagens.value);
   axios.post('https://mock-api.driven.com.br/api/vm/uol/messages' , data).then((resposta) => {
-    console.log("🚀 ~ file: script.js:109 ~ axios.post ~ resposta:", resposta);
     buscarMensagens();
     inputMensagens.value = '';
   }).catch((erro) => {
     window.location.reload();
     console.log('erro', erro);
   })
+}
+
+function selecionarUsuario(elemento, usuario){ 
+    console.log(elemento, usuario)
+    const icones = document.querySelectorAll('div.usuarios > div > .selecionado-icone')
+    console.log(icones)
+    icones.forEach(elemento =>   elemento.classList.add('esconder'))
+
+    elemento.querySelector('.selecionado-icone').classList.remove('esconder')
+
+}
+
+function selecionarVisibilidade(elemento, tipo){ 
+    console.log(elemento, tipo)
+}
+
+function pegarUsuarios(){
+    const elementoListaUsuario = document.querySelector('div.usuarios')
+    let elemntosDaLista =  `<div onclick="selecionarUsuario(this, 'Todos')">
+     <div>
+         <ion-icon class="icones" name="people"></ion-icon>                        
+         <p>Todos</p>
+        </div>
+     <ion-icon class="selecionado-icone icones " name="checkmark-sharp"></ion-icon>
+    </div>`
+    axios.get('https://mock-api.driven.com.br/api/vm/uol/participants').then(resposta => {
+        console.log('resposta usuario', resposta)
+        if(usuarios.length != resposta.data.length){
+            usuarios = resposta.data
+            usuarios.forEach(usuario => { 
+                elemntosDaLista += `<div onclick="selecionarUsuario(this, '${usuario.name}')">
+                <div>
+                <ion-icon  class="icones" name="person-circle"></ion-icon>
+                <p>${usuario.name}</p>
+                </div>
+                <ion-icon class="selecionado-icone icones esconder" name="checkmark-sharp"></ion-icon>
+                </div> `
+            });
+            console.log('elemntosDaLista', elemntosDaLista)
+            elementoListaUsuario.innerHTML = elemntosDaLista 
+        }
+    })
+
+    
+   
 }
 
 
