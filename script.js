@@ -76,7 +76,7 @@ function criandoListaDeMensagens(novasMensagens){
     novasMensagens.forEach((mensagem) => {
       if(mensagem.type === 'message'){
         listaMensagensHTML +=
-         `<li class="listyle">
+         `<li data-test="message" class="listyle">
             <p  >
                 <span  >(${mensagem.time}) </span>
                 <strong class="space"  >  ${mensagem.from} </strong>  para <strong>${mensagem.to}</strong>: ${mensagem.text}
@@ -85,7 +85,7 @@ function criandoListaDeMensagens(novasMensagens){
       }
       if(mensagem.type === 'status'){
         listaMensagensHTML += 
-        `<li class="listyle status">
+        `<li data-test="message" class="listyle status">
             <p  >
                 <span> (${mensagem.time}) </span>
                 <strong class="space"  > ${mensagem.from} </strong> ${mensagem.text} 
@@ -95,7 +95,7 @@ function criandoListaDeMensagens(novasMensagens){
 
       if(mensagem.type === 'private_message'){
         listaMensagensHTML +=
-         `<li class="listyle privado">
+         `<li data-test="message" class="listyle privado">
             <p>
                  <span >(${mensagem.time}) </span>
                  <strong class="space" >  ${mensagem.from} </strong> para  <strong  >${mensagem.to}</strong>: ${mensagem.text}
@@ -141,7 +141,7 @@ function selecionarVisibilidade(elemento, tipo){
 function pegarUsuarios(){
     const elementoListaUsuario = document.querySelector('div.usuarios')
     let elemntosDaLista =  `<div onclick="selecionarUsuario(this, 'Todos')">
-     <div>
+     <div data-test="all" >
          <ion-icon class="icones" name="people"></ion-icon>                        
          <p>Todos</p>
         </div>
@@ -152,7 +152,7 @@ function pegarUsuarios(){
         if(usuarios.length != resposta.data.length){
             usuarios = resposta.data
             usuarios.forEach(usuario => { 
-                elemntosDaLista += `<div onclick="selecionarUsuario(this, '${usuario.name}')">
+                elemntosDaLista += `<div data-test="participant" onclick="selecionarUsuario(this, '${usuario.name}')">
                 <div>
                 <ion-icon  class="icones" name="person-circle"></ion-icon>
                 <p>${usuario.name}</p>
