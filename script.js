@@ -170,10 +170,18 @@ function pegarUsuarios(){
 }
 
 
-const inputMensagens = document.querySelector('input');
+const inputMensagens = document.querySelector('input.mensagem');
 inputMensagens.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
     event.preventDefault();
     enviarMensagem();
+  }
+});
+
+const inputNomeUusario = document.querySelector('#nomeUsuario');
+inputNomeUusario.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    loginDoUsuario();
   }
 });
